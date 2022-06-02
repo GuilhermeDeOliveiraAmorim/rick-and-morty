@@ -1,0 +1,8 @@
+.Paginator ul {
+    display: flex;
+    justify-content: center;
+}
+
+.Paginator li {
+    padding: 15px;
+}
