@@ -1,16 +1,16 @@
+import "./App.css";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Card from "./components/card";
 
-import "./App.css";
-import Paginator from "./components/paginator";
-
 function App() {
     const [characters, setCharacters] = useState<[]>([]);
+    const [page, setPage] = useState<number>(1);
 
     useEffect(() => {
         axios
-            .get("https://rickandmortyapi.com/api/character/?page=3")
+            .get("https://rickandmortyapi.com/api/character/?page=" + page)
             .then((resposta) => {
                 setCharacters(resposta.data["results"]);
                 console.log(resposta.data);
@@ -18,7 +18,11 @@ function App() {
             .catch((erro) => {
                 console.log(erro);
             });
-    }, []);
+    }, [page]);
+
+    function handlePage(pageNumber: number) {
+        setPage(pageNumber);
+    }
 
     return (
         <>
@@ -34,7 +38,25 @@ function App() {
                     />
                 ))}
             </div>
-            <Paginator />
+            <div className="Paginator">
+                <ul>
+                    <li>
+                        <button onClick={() => handlePage(1)}>1</button>
+                    </li>
+                    <li>
+                        <button onClick={() => handlePage(2)}>2</button>
+                    </li>
+                    <li>
+                        <button onClick={() => handlePage(3)}>3</button>
+                    </li>
+                    <li>
+                        <button onClick={() => handlePage(4)}>4</button>
+                    </li>
+                    <li>
+                        <button onClick={() => handlePage(5)}>5</button>
+                    </li>
+                </ul>
+            </div>
         </>
     );
 }
