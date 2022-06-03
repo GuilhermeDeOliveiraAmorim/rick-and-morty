@@ -5,15 +5,30 @@ import { useEffect, useState } from "react";
 import Card from "./components/card";
 
 function App() {
+
+    const startPaginator = [1, 2, 3, 4, 5];
+    
     const [characters, setCharacters] = useState<[]>([]);
     const [page, setPage] = useState<number>(1);
+    const [count, setCount] = useState<number>(1);
+    const [paginator, setPaginator] = useState<number[]>(startPaginator);
+    
+    const endPaginator = [count - 4, count - 3, count - 2, count - 1, count];
 
     useEffect(() => {
         axios
             .get("https://rickandmortyapi.com/api/character/?page=" + page)
             .then((resposta) => {
                 setCharacters(resposta.data["results"]);
-                console.log(resposta.data);
+            })
+            .catch((erro) => {
+                console.log(erro);
+            });
+        
+        axios
+            .get("https://rickandmortyapi.com/api/character/")
+            .then((resposta) => {
+                setCount(resposta.data["info"]["count"]);
             })
             .catch((erro) => {
                 console.log(erro);
@@ -21,7 +36,17 @@ function App() {
     }, [page]);
 
     function handlePage(pageNumber: number) {
+        
         setPage(pageNumber);
+
+        console.log(pageNumber);
+
+    }
+
+    function handleNextPage(param: number) {
+
+        
+        
     }
 
     return (
@@ -39,23 +64,15 @@ function App() {
                 ))}
             </div>
             <div className="Paginator">
+                <p>AAA</p>
                 <ul>
-                    <li>
-                        <button onClick={() => handlePage(1)}>1</button>
-                    </li>
-                    <li>
-                        <button onClick={() => handlePage(2)}>2</button>
-                    </li>
-                    <li>
-                        <button onClick={() => handlePage(3)}>3</button>
-                    </li>
-                    <li>
-                        <button onClick={() => handlePage(4)}>4</button>
-                    </li>
-                    <li>
-                        <button onClick={() => handlePage(5)}>5</button>
-                    </li>
+                    {paginator?.map((paginatorPage) => (
+                        <li>
+                            <button onClick={() => handlePage(paginatorPage)}>{paginatorPage}</button>
+                        </li>
+                    ))}
                 </ul>
+                <button onClick={() => handleNextPage(1)}>BBB</button>
             </div>
         </>
     );
