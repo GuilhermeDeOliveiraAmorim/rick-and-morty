@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Card from "./components/card";
+import Search from "./components/search";
 
 function App() {
     
@@ -57,6 +58,7 @@ function App() {
 
     return (
         <>
+            <Search />
             <div className="App">
                 {characters?.map((item) => (
                     <Card
