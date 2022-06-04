@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Card from "./components/card";
 
 function App() {
-
+    
     const startPaginator = [1, 2, 3, 4, 5];
     
     const [characters, setCharacters] = useState<[]>([]);
@@ -39,20 +39,20 @@ function App() {
         
         setPage(pageNumber);
 
-        console.log(pageNumber);
+        var paginationRule = [];
 
-    }
+        if (pageNumber < 4) {
 
-    function handleNextPage(param: number) {
-
+            paginationRule = startPaginator;
         
-        
-    }
+        } else {
+            
+            paginationRule = [pageNumber - 2, pageNumber - 1, pageNumber, pageNumber + 1, pageNumber + 2];
 
-    function handlePrevPage(param: number) {
+        }
 
-        
-        
+        setPaginator(paginationRule);
+
     }
 
     return (
@@ -70,7 +70,7 @@ function App() {
                 ))}
             </div>
             <div className="Paginator">
-                <button onClick={() => handlePage(1)}>Prev</button>
+                <button onClick={() => handlePage(paginator[0] - 1)}>Previous</button>
                 <ul>
                     {paginator?.map((paginatorPage) => (
                         <li>
@@ -78,7 +78,7 @@ function App() {
                         </li>
                     ))}
                 </ul>
-                <button onClick={() => handlePage(1)}>Next</button>
+                <button onClick={() => handlePage(paginator[4] + 1)}>Next</button>
             </div>
         </>
     );
