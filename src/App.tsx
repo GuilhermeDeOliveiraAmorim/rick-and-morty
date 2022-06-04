@@ -14,7 +14,7 @@ function App() {
     const [count, setCount] = useState<number>(1);
     const [paginator, setPaginator] = useState<number[]>(startPaginator);
     
-    const endPaginator = [count - 4, count - 3, count - 2, count - 1, count];
+    //const endPaginator = [count - 4, count - 3, count - 2, count - 1, count];
 
     useEffect(() => {
         axios
@@ -34,7 +34,7 @@ function App() {
             .catch((erro) => {
                 console.log(erro);
             });
-    }, [page]);
+    }, [page, count]);
 
     function handlePage(pageNumber: number) {
         
