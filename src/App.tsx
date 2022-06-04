@@ -49,6 +49,12 @@ function App() {
         
     }
 
+    function handlePrevPage(param: number) {
+
+        
+        
+    }
+
     return (
         <>
             <div className="App">
@@ -64,7 +70,7 @@ function App() {
                 ))}
             </div>
             <div className="Paginator">
-                <p>AAA</p>
+                <button onClick={() => handlePage(1)}>Prev</button>
                 <ul>
                     {paginator?.map((paginatorPage) => (
                         <li>
@@ -72,7 +78,7 @@ function App() {
                         </li>
                     ))}
                 </ul>
-                <button onClick={() => handleNextPage(1)}>BBB</button>
+                <button onClick={() => handlePage(1)}>Next</button>
             </div>
         </>
     );
