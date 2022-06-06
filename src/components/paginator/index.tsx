@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+interface IProps {
+    page: number;
+}
 
-export default function Paginator() {
+export default function Paginator(props: IProps) {
 
     const startPaginator = [1, 2, 3, 4, 5];
 
